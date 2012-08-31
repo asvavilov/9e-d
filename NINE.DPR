@@ -1,0 +1,38 @@
+program nine;
+
+uses
+  Forms,
+  Windows,
+  SysUtils,
+  Unit1 in 'Unit1.pas' {frmMain},
+  Unit2 in 'Unit2.pas' {frmID},
+  Unit3 in 'Unit3.pas' {frmInfo};
+
+{$R *.res}
+
+var
+hwnd, hwnd2: THandle;
+
+begin
+hwnd := FindWindow('TfrmMain', '9E (Девятка) v1.0');
+//  hwnd:=0;//временная строка
+if hwnd = 0 then
+begin
+  Application.Initialize;
+  Application.Title := '9E (Девятка)';
+  Application.CreateForm(TfrmMain, frmMain);
+  Application.CreateForm(TfrmID, frmID);
+  Application.CreateForm(TfrmInfo, frmInfo);
+  Application.ShowMainForm:=false;
+  Application.Run;
+end
+else
+  begin
+  hwnd2:=FindWindow('TfrmInfo','Справка');
+  if hwnd2=0 then
+    SetForegroundWindow(hwnd)
+    else
+    SetForegroundWindow(hwnd2);
+  end;
+
+end.
